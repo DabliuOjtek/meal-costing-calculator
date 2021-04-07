@@ -2,21 +2,26 @@ package com.paw.mealcostingcalculator.controller;
 
 import com.paw.mealcostingcalculator.configuration.SpringFoxConfig;
 import com.paw.mealcostingcalculator.dto.MealPlanDTO;
+import com.paw.mealcostingcalculator.service.MealPlanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Api(tags={SpringFoxConfig.mealPlan})
 public class MealPlanController {
 
+    private final MealPlanService mealPlanService;
+
     @ApiOperation(value = "Returns list of meal plans")
     @GetMapping("/meal-plans")
-    private MealPlanDTO getMealPlans(){
-        return MealPlanDTO.builder().build();
+    private List<MealPlanDTO> getMealPlans(){
+        return null;
     }
 
     @ApiOperation(value = "Returns meal plan from a specific date")

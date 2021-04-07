@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 @Getter
 @Builder
 public class ProductDTO {
-    private Integer product_id;
+    private Integer productId;
     private String name;
-    private Double amount_in_grams;
-    private BigDecimal product_price;
+    private Double amountInGrams;
+    private BigDecimal price;
 }
