@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -15,11 +16,10 @@ public class MealEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mealId;
     private String name;
+    private BigDecimal cost;
+    private Integer mealPlanId;
 
-    @OneToMany(mappedBy = "mealEntity")
+    @OneToMany(mappedBy = "mealId", fetch = FetchType.LAZY)
     private List<ProductBatchEntity> products;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "meal_plan_id")
-    private MealPlanEntity mealPlanEntity;
+    
 }

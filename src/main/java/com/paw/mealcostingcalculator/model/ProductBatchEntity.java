@@ -15,14 +15,8 @@ public class ProductBatchEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productBatchId;
     private String name;
-    private String amountInGrams;
+    private Double amountInGrams;
     private BigDecimal cost;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    private ProductEntity productEntity;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "meal_id")
-    private MealEntity mealEntity;
+    private Integer productId;
+    private Integer mealId;
 }

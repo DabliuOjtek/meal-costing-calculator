@@ -1,4 +1,4 @@
-package com.paw.mealcostingcalculator.dto;
+package com.paw.mealcostingcalculator.dtos;
 
 import lombok.Builder;
 import lombok.Getter;

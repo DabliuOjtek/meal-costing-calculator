@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(hidden = true)
     private Integer productId;
     private String name;
     private Double amountInGrams;

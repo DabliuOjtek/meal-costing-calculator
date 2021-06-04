@@ -1,12 +1,15 @@
 package com.paw.mealcostingcalculator.service;
 
-import com.paw.mealcostingcalculator.dto.ProductDTO;
+import com.paw.mealcostingcalculator.dtos.ProductDTO;
+import com.paw.mealcostingcalculator.dtos.saveDTOS.ProductSaveDTO;
 import com.paw.mealcostingcalculator.mapper.ProductMapper;
 import com.paw.mealcostingcalculator.model.ProductEntity;
 import com.paw.mealcostingcalculator.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -23,11 +26,34 @@ public class ProductService {
         return ProductMapper.mapToProductDTO(productRepository.findById(id).orElseThrow());
     }
 
-    public ProductEntity addProduct(ProductEntity product){
-        return productRepository.save(product);
+    @Transactional
+    public void addProduct(ProductSaveDTO product){
+        ProductEntity productEntity = ProductMapper.mapToProductSaveDTO(product);
+
+        if(!productEntity.getName().isEmpty() && productEntity.getAmountInGrams() != null && productEntity.getPrice() != null) {
+            productRepository.save(productEntity);
+        }
+        else{
+            throw new IllegalArgumentException("Parameters cannot be empty");
+        }
     }
 
     public void deleteProduct(Integer id){
         productRepository.deleteById(id);
+    }
+
+    public String getProductName(Integer id){
+        ProductEntity productEntity = productRepository.findById(id).get();
+        return productEntity.getName();
+    }
+
+    public BigDecimal getProductPrice(Integer id){
+        ProductEntity productEntity = productRepository.findById(id).get();
+        return productEntity.getPrice();
+    }
+
+    public Double getProductAmountInGrams(Integer id){
+        ProductEntity productEntity = productRepository.findById(id).get();
+        return productEntity.getAmountInGrams();
     }
 }
