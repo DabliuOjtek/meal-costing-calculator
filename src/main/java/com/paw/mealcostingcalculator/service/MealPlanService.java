@@ -69,6 +69,17 @@ public class MealPlanService {
         }
     }
 
+    @Transactional
+    public void updateMealPlan(LocalDate date, MealPlanSaveDTO mealPlan, UserDetailsImpl userDetails) {
+        MealPlanEntity mealPlanEntity = getMealPlanByDate(date);
+
+        if (mealPlanEntity.getDate() != null) {
+            mealPlanEntity.setDate(mealPlan.getDate());
+        } else {
+            throw new IllegalArgumentException("Parameter cannot be empty");
+        }
+    }
+
     public void updateMealPlanCost(Integer id, BigDecimal newMealCost) {
         MealPlanEntity mealPlanEntity = getMealPlanById(id);
         BigDecimal currentCost = mealPlanEntity.getCost();

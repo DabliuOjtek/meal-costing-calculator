@@ -69,6 +69,19 @@ public class MealService {
         }
     }
 
+    @Transactional
+    public void updateMeal(Integer id, MealSaveDTO meal, UserDetailsImpl userDetails) {
+        MealEntity mealEntity = getMealById(id);
+        List<MealEntity> mealEntityList = virtualFieldsService.getUserMealsList(userDetails);
+
+        if (mealEntityList.contains(mealEntity)) {
+            mealEntity.setMealPlanId(meal.getMealPlanId());
+            mealEntity.setName(meal.getName());
+        } else {
+            throw new NoSuchElementException("The meal you are looking for, does not belong to the user");
+        }
+    }
+
     public String getMealName(Integer id) {
         if (id != null) {
             MealEntity mealEntity = getMealById(id);

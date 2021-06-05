@@ -3,7 +3,6 @@ package com.paw.mealcostingcalculator.service;
 import com.paw.mealcostingcalculator.model.MealEntity;
 import com.paw.mealcostingcalculator.model.MealPlanEntity;
 import com.paw.mealcostingcalculator.model.ProductBatchEntity;
-import com.paw.mealcostingcalculator.repository.MealPlanRepository;
 import com.paw.mealcostingcalculator.repository.MealRepository;
 import com.paw.mealcostingcalculator.repository.ProductBatchRepository;
 import lombok.RequiredArgsConstructor;

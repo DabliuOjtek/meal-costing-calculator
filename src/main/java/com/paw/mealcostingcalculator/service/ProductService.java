@@ -22,37 +22,39 @@ public class ProductService {
         return ProductMapper.mapToProductDTOS(productRepository.findAll());
     }
 
-    public ProductDTO getSingleProduct(Integer id){
+    public ProductDTO getSingleProduct(Integer id) {
         return ProductMapper.mapToProductDTO(productRepository.findById(id).orElseThrow());
     }
 
     @Transactional
-    public void addProduct(ProductSaveDTO product){
+    public void addProduct(ProductSaveDTO product) {
         ProductEntity productEntity = ProductMapper.mapToProductSaveDTO(product);
 
-        if(!productEntity.getName().isEmpty() && productEntity.getAmountInGrams() != null && productEntity.getPrice() != null) {
+        if (!productEntity.getName().isEmpty() && productEntity.getAmountInGrams() != null &&
+                productEntity.getAmountInGrams() > 0 &&
+                productEntity.getPrice() != null &&
+                productEntity.getAmountInGrams() > 0) {
             productRepository.save(productEntity);
-        }
-        else{
-            throw new IllegalArgumentException("Parameters cannot be empty");
+        } else {
+            throw new IllegalArgumentException("Parameters cannot be empty or less than zero");
         }
     }
 
-    public void deleteProduct(Integer id){
+    public void deleteProduct(Integer id) {
         productRepository.deleteById(id);
     }
 
-    public String getProductName(Integer id){
+    public String getProductName(Integer id) {
         ProductEntity productEntity = productRepository.findById(id).get();
         return productEntity.getName();
     }
 
-    public BigDecimal getProductPrice(Integer id){
+    public BigDecimal getProductPrice(Integer id) {
         ProductEntity productEntity = productRepository.findById(id).get();
         return productEntity.getPrice();
     }
 
-    public Double getProductAmountInGrams(Integer id){
+    public Double getProductAmountInGrams(Integer id) {
         ProductEntity productEntity = productRepository.findById(id).get();
         return productEntity.getAmountInGrams();
     }

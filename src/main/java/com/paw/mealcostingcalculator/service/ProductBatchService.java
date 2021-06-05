@@ -45,7 +45,7 @@ public class ProductBatchService {
     public void addProductBatch(ProductBatchSaveDTO product) {
         ProductBatchEntity productBatchEntity = ProductBatchMapper.mapToProductBatchSaveDTO(product);
 
-        if (!productBatchEntity.getName().isEmpty() && productBatchEntity.getAmountInGrams() != null) {
+        if (!productBatchEntity.getName().isEmpty() && productBatchEntity.getAmountInGrams() != null && productBatchEntity.getAmountInGrams() > 0) {
             BigDecimal productBatchCost = calculateProductBatchCost(productBatchEntity);
 
             if (productBatchEntity.getMealId() == 0 || productBatchEntity.getMealId() == null) {
@@ -58,7 +58,7 @@ public class ProductBatchService {
             productBatchEntity.setCost(productBatchCost);
             productBatchRepository.save(productBatchEntity);
         } else {
-            throw new IllegalArgumentException("Parameters cannot be empty");
+            throw new IllegalArgumentException("Parameters cannot be empty or less than zero");
         }
     }
 
@@ -67,7 +67,6 @@ public class ProductBatchService {
         List<ProductBatchEntity> productBatchList = virtualFieldsService.getUserProductBatches(userDetails);
 
         if (productBatchList.contains(productBatchEntity)) {
-            productBatchList.remove(productBatchEntity);
             productBatchRepository.deleteById(id);
         } else {
             throw new NoSuchElementException("The product batch you are looking for, does not belong to the user");

@@ -40,9 +40,19 @@ public class MealPlanController {
 
     @ApiOperation(value = "Creates a new meal plan")
     @PostMapping("/meal-plans")
-    private void addMealPlans(@RequestBody MealPlanSaveDTO mealPlanSaveDTO,@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        mealPlanService.addMealPlan(mealPlanSaveDTO,userDetails);
+    private void addMealPlans(@RequestBody MealPlanSaveDTO mealPlanSaveDTO, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        mealPlanService.addMealPlan(mealPlanSaveDTO, userDetails);
     }
+
+    @ApiOperation(value = "Updates a specific specific meal plan")
+    @PutMapping("/meal-plan/{date}")
+    private void updateMealPlan(@ApiParam(value = "Date of meal plan to return", example = "1", required = true)
+                                @RequestBody MealPlanSaveDTO mealPlanSaveDTO,
+                                @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        mealPlanService.updateMealPlan(date, mealPlanSaveDTO, userDetails);
+    }
+
 
     @ApiOperation(value = "Deletes a specific meal plan")
     @DeleteMapping("/meal-plan/{date}")

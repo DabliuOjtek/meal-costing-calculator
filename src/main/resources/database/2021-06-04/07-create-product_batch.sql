@@ -25,6 +25,6 @@ ALTER TABLE [dbo].[product_batch] CHECK CONSTRAINT [FK_product_batch_meal]
 
 ALTER TABLE [dbo].[product_batch]  WITH CHECK ADD  CONSTRAINT [FK_product_batch_product1] FOREIGN KEY([product_id])
     REFERENCES [dbo].[product] ([product_id])
-    ON DELETE SET NULL
+    ON DELETE SET CASCADE
 
 ALTER TABLE [dbo].[product_batch] CHECK CONSTRAINT [FK_product_batch_product1]
