@@ -1,7 +1,6 @@
 --liquibase formatted sql
 --changeset dabliuojtek:1
 
-
 SET IDENTITY_INSERT [dbo].[user] ON
 INSERT [dbo].[user] ([user_id], [username], [password])VALUES (1, N'wst', N'$2a$10$cndkSyi0XBd6X8JbHXZh.u7X8Ls7DYCTZpnUJZfNAo9oFrs/WO99O')
 INSERT [dbo].[user] ([user_id], [username], [password]) VALUES (2, N'test', N'$2a$10$QUlvhwKzvH65EiKlGulsN.uJEy/1j67PJOt6HBlSVnn5QTIu/./gC')
