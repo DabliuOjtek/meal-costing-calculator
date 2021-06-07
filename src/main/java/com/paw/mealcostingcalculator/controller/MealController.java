@@ -42,10 +42,10 @@ public class MealController {
     }
 
     @ApiOperation(value = "Updates a specific meal")
-    @PutMapping("/meal/{id}")
-    private void updateMeal(@ApiParam(value = "Meal's ID to update", example = "1", required = true) @PathVariable Integer id,
-                            @AuthenticationPrincipal UserDetailsImpl userDetail, @RequestBody MealSaveDTO mealSaveDTO ) {
-        mealService.updateMeal(id,mealSaveDTO, userDetail);
+    @PutMapping("/meal")
+    private void updateMeal(@ApiParam(value = "Meal's ID to update", example = "1", required = true)
+                            @AuthenticationPrincipal UserDetailsImpl userDetail, @RequestBody MealDTO mealDTO ) {
+        mealService.updateMeal(mealDTO, userDetail);
     }
 
     @ApiOperation(value = "Deletes a specific meal")

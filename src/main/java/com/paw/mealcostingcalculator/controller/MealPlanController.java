@@ -45,12 +45,10 @@ public class MealPlanController {
     }
 
     @ApiOperation(value = "Updates a specific specific meal plan")
-    @PutMapping("/meal-plan/{date}")
+    @PutMapping("/meal-plan")
     private void updateMealPlan(@ApiParam(value = "Date of meal plan to return", example = "1", required = true)
-                                @RequestBody MealPlanSaveDTO mealPlanSaveDTO,
-                                @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-                                @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        mealPlanService.updateMealPlan(date, mealPlanSaveDTO, userDetails);
+                                @RequestBody MealPlanDTO mealPlanDTO) {
+        mealPlanService.updateMealPlan(mealPlanDTO);
     }
 
 

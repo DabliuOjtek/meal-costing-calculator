@@ -70,8 +70,9 @@ public class MealPlanService {
     }
 
     @Transactional
-    public void updateMealPlan(LocalDate date, MealPlanSaveDTO mealPlan, UserDetailsImpl userDetails) {
-        MealPlanEntity mealPlanEntity = getMealPlanByDate(date);
+    public void updateMealPlan(MealPlanDTO mealPlan) {
+        LocalDate mealPlanDate = mealPlan.getDate();
+        MealPlanEntity mealPlanEntity = getMealPlanByDate(mealPlanDate);
 
         if (mealPlanEntity.getDate() != null) {
             mealPlanEntity.setDate(mealPlan.getDate());

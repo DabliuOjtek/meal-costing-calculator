@@ -70,8 +70,9 @@ public class MealService {
     }
 
     @Transactional
-    public void updateMeal(Integer id, MealSaveDTO meal, UserDetailsImpl userDetails) {
-        MealEntity mealEntity = getMealById(id);
+    public void updateMeal(MealDTO meal, UserDetailsImpl userDetails) {
+        Integer mealId = meal.getMealId();
+        MealEntity mealEntity = getMealById(mealId);
         List<MealEntity> mealEntityList = virtualFieldsService.getUserMealsList(userDetails);
 
         if (mealEntityList.contains(mealEntity)) {
