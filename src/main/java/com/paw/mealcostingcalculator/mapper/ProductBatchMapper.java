@@ -24,6 +24,7 @@ public class ProductBatchMapper {
     public static ProductBatchDTO mapToProductBatchDTO(ProductBatchEntity productBatchEntity, String productName, String mealName) {
         return ProductBatchDTO.builder()
                 .productBatchId(productBatchEntity.getProductBatchId())
+                .productBatchName(productBatchEntity.getName())
                 .amountInGrams(productBatchEntity.getAmountInGrams())
                 .cost(productBatchEntity.getCost())
                 .product(productName)
